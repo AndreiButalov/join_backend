@@ -38,13 +38,16 @@ class TasksView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)    
+        return self.create(request, *args, **kwargs)  
+      
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)   
     
 
 class TasksDetail(mixins.RetrieveModelMixin,
-                    mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,
-                    generics.GenericAPIView):
+                  mixins.UpdateModelMixin,
+                  mixins.DestroyModelMixin,
+                  generics.GenericAPIView):
     queryset = Tasks.objects.all()
     serializer_class = TasksSerializer
 
@@ -53,6 +56,9 @@ class TasksDetail(mixins.RetrieveModelMixin,
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
