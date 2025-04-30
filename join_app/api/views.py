@@ -38,7 +38,7 @@ class TasksView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+        return self.create(request, *args, **kwargs)    
     
 
 class TasksDetail(mixins.RetrieveModelMixin,

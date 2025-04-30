@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -19,15 +20,18 @@ class GuestContacts(models.Model):
     phone = models.TextField()
 
 
-
 class Tasks(models.Model):
-    name = models.CharField(max_length=255)
-    color = models.CharField(max_length=50)
-    date = models.DateField()
-    description = models.TextField()
-    initial = models.TextField() 
-    priotity = models.CharField(20)    
-    priorityImg = models.TextField()
-    status = models.CharField(20)
+    name = models.TextField(default="")
+    color = models.TextField(default="")
+    date = models.DateField(default=timezone.localdate)
+    description = models.TextField(null=True, blank=True)
+    initial = models.TextField(default="") 
+    priority = models.CharField(max_length=20, default="Medium")    
+    priorityImg = models.TextField(default="./assets/img/vector_strich.svg") 
+    status = models.CharField(max_length=20)
     title = models.CharField(255)
-    assignedTo = models.TextField()
+    assignedTo = models.TextField(default="")
+    category = models.CharField(max_length=20, null=True, blank=True)
+    # name = models.ManyToManyField(GuestContacts, related_name="tasks")
+
+
